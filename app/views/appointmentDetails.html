@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">{{ appointment.subject }}</h3>
+        </div>
+        <div class="panel-body">
+            <p><b><span class="fa fa-eye"></span> Purpose:</b> {{ appointment.purpose }}</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-calendar"></span> Date:</label> {{ date }}</li>
+            <li class="list-group-item"><label><span class="fa fa-clock-o"></span> Time:</label> {{ start }} - {{ end }}</li>
+            <li class="list-group-item"><label><span class="fa fa-building-o"></span> Venue:</label> {{ appointment.venue }}</li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><span class="fa fa-list-alt"></span> <label>Agendas:</label></li>
+            <li class="list-group-item" ng-repeat="agenda in agendas"><span class="fa fa-square-o"></span> {{ agenda.description }}</li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-group"></span> Meeting Personnel:</label></li>
+            <li class="list-group-item" ng-repeat="emp_stat in emp_stats">{{ emp_stat.first_name }} {{ emp_stat.last_name }} <span class="pull-right"><span ng-if="emp_stat.status === 'Attendance Confirmed'" class="fa fa-check text-success"></span> {{ emp_stat.status }}</span></li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-institution"></span> Departments:</label></li>
+            <li class="list-group-item" ng-repeat="dept in appointment.departments">{{ dept.name }}</li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-user"></span> Appointment set by:</label> {{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-info-circle"></span> Notes:</label> {{ appointment.notes }}</li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-info-circle"></span> Status:</label> {{ appointment.status }}</li>
+        </ul>
+    </div>
+    <div class="row" ng-if="appointment.employee_id === user.id">
+        <div class="col-md-6">
+          <a class="pull-left btn btn-primary" href="#/scheduler/appointment/{{appointment.id}}/edit"><span class="panel-title fa fa-edit"></span> Edit</a>
+        </div>
+        <div class="col-md-6" ng-if="isCancelled">
+          <button class="btn btn-success pull-right" ng-click="reSched(appointment)"><span class="fa fa-check"></span> Re-schedule</button>
+        </div>
+        <div class="col-md-6" ng-if="!isCancelled">
+          <button class="btn btn-danger pull-right" ng-click="cancelAppointment(appointment)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+        </div>
+    </div>
+    <div class="row" ng-if="isPending">
+      <div class="col-md-6">
+        <button class="btn btn-warning pull-left"><span class="fa fa-remove"></span> Schedule Not Available</button>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-primary pull-right" ng-click="confirmAttendance(appointment)"><span class="fa fa-check"></span> Confirm Attendance</button>
+      </div>
+    </div>
+    <div class="row" ng-if="isCancelledAttendance">
+      <div class="col-md-6">
+
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-primary pull-right" ng-click="confirmAttendance(appointment)"><span class="fa fa-check"></span> Confirm Attendance</button>
+      </div>
+    </div>
+    <div class="row" ng-if="isApproved && appointment.status != 'Cancelled'">
+      <div class="col-md-12">
+        <button class="btn btn-danger pull-right" ng-click="cancelAttendance(appointment)"><span class="fa fa-remove"></span> Cancel Attendance</button>
+      </div>
+    </div>
+    <div class="row" ng-if="isApproved && appointment.status === 'Cancelled'">
+      <div class="col-md-12">
+        <button disabled class="btn btn-danger pull-right" ng-click="cancelAttendance(appointment)"><span class="fa fa-remove"></span> Cancel Attendance</button>
+      </div>
+    </div>
+</div>

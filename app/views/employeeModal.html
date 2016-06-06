@@ -1,0 +1,20 @@
+<form class="form-horizontal">
+    <div class="modal-header">
+        <h3 class="modal-title">Add an Employee to Meeting</h3>
+    </div>
+    <div class="modal-body">
+        <select chosen id="emp" class="form-control" placeholder="Select an Employee" ng-model="selectedEmp"
+                ng-options="selectedEmp as selectedEmp.first_name for selectedEmp in employees track by selectedEmp.id"
+                ng-change="addEmp(selectedEmp)"></select>
+        Selected:
+        <ul>
+            <li ng-repeat="emp in storedSelectedEmps track by emp.id">
+                {{ emp.first_name }} {{ emp.last_name }}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="addEmp()">Add</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+<div class="container">
+  <flash-message></flash-message>
+  <h4>List of Employees</h4><a ng-href="/#/employees/add"><span class="fa fa-plus"></span> Add</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee No.</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Level</th>
+        <th>Position</th>
+        <th>Email Address</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="emp in employees">
+        <td>{{ emp.emp_num }}</td>
+        <td>{{ emp.first_name }} {{ emp.last_name}}</td>
+        <td>{{ emp.department.name }}</td>
+        <td>{{ emp.level.description }}</td>
+        <td>{{ emp.position.title }}</td>
+        <td>{{ emp.email }}</td>
+        <td><a class="btn btn-primary btn-sm" ng-href="/#/employees/{{emp.id}}/edit">Edit</a></td>
+        <td><span class="btn btn-danger btn-sm" ng-click="delete(emp.id)">Delete</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

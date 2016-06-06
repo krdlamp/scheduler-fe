@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/scheduled">Scheduled <span class="badge">{{ scheduledCount }}</span> </a>
+    </div>
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge">{{ pendingCount }}</span> </a>
+    </div>
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge">{{ approvedCount }}</span> </a>
+    </div>
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-primary" href="#/scheduler/appointments/my-appointments/requested">Requested <span class="badge">{{ requestsCount }}</span> </a>
+    </div>
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge">{{ cancelledCount }}</span> </a>
+    </div>
+  </div>
+  <div class="col-sm-6">
+  <h3>Requested Appointments</h3>
+  <p ng-if="requestsCount <= 0"><i>No appointment requests.</i></p>
+    <div class="panel panel-default row" ng-repeat="request in requests">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ request.set_date | date : 'MMMM d, yyyy' }}
+                </div>
+            </div>
+            <div class="panel-body col-sm-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p><label>Subject:</label> {{ request.subject }}</p>
+                  <p><label>Time:</label> {{ formatTime(request.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(request.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                  <p><label>Venue:</label> {{ request.venue }}</p>
+                  <p ng-init="getEmp(request.employee_id)"><label>Set by:</label> {{ employee.first_name }} {{ employee.last_name }}</p>
+                  <p><label>Status:</label> {{ request.status }}</p>
+                </div>
+                <div class="col-sm-6">
+                  <p><label>Meeting Personnel:</label></p>
+                  <ul ng-init="getEmps(request.id)">
+                    <li ng-repeat="emp in emps">{{ emp.first_name }} {{ emp.last_name }}</li>
+                  </ul>
+                  <p><label>Notes:</label> {{ request.notes }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{request.id}}/details">See Details >></a></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button ng-if="request.status != 'Cancelled'" class="btn btn-danger text-center col-xs-12 btn-confirm" ng-click="cancelAppointment(request)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+                  <button ng-if="request.status === 'Cancelled'" class="btn btn-success text-center col-xs-12" ng-click="reSched(request)"><span class="fa fa-check"></span> Re-schedule</button>
+                </div>
+              </div>
+            </div>
+    </div>
+</div>

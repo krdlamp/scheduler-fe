@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/scheduled">Scheduled <span class="badge">{{ scheduledCount }}</span> </a>
+      </div>
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary" href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge">{{ pendingCount }}</span> </a>
+      </div>
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge">{{ approvedCount }}</span> </a>
+      </div>
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/requested">Requested <span class="badge">{{ requestsCount }}</span> </a>
+      </div>
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-default" href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge">{{ cancelledCount }}</span> </a>
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <h3>Pending Appointments</h3>
+        <p ng-if="pendingCount <= 0"><i>No pending appointments.</i></p>
+        <div class="panel panel-default row" ng-repeat="invitation in pendingInvitations">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ invitation.set_date | date : 'MMMM d, yyyy' }}
+                </div>
+            </div>
+            <div class="panel-body col-sm-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p><label>Subject:</label> {{ invitation.subject }}</p>
+                  <p><label>Time:</label> {{ formatTime(invitation.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(invitation.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                  <p><label>Venue:</label> {{ invitation.venue }}</p>
+                  <p ng-init="getEmp(invitation.employee_id)"><label>Set by:</label> {{ employee.first_name }} {{ employee.last_name }}</p>
+                  <p><label>Status:</label> Pending</p>
+                </div>
+                <div class="col-sm-6">
+                  <p><label>Meeting Personnel:</label></p>
+                  <ul ng-init="getEmps(invitation.id)">
+                    <li ng-repeat="emp in emps">{{ emp.first_name }} {{ emp.last_name }}</li>
+                  </ul>
+                  <p><label>Notes:</label> {{ invitation.notes }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{invitation.id}}/details">See Details >></a></p>
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary text-center col-sm-12 btn-confirm" ng-click="confirmAttendance(invitation)"><span class="fa fa-check"></span> Confirm Attendance</button>
+                <button class="btn btn-warning text-center col-sm-12 btn-confirm" ng-click="notAvailable(invitation)"><span class="fa fa-remove"></span> Schedule Not Available</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

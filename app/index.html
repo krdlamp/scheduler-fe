@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="scheduler">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#/"><span class="fa fa-calendar-plus-o"></span> AppointmentScheduler</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+            <li ng-if="authenticated === true"><a href="#/scheduler/appointments">Schedule</a></li>
+            <li ng-if="authenticated === true"><a href="#/scheduler/appointments/scheduling-transactions">Appointment Logs</a></li>
+            <li ng-if="authenticated === true"><a ng-href="#/scheduler">Set Appointment</a></li>
+            <!-- <li class="dropdown" ng-if="authenticated === true">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Appointments <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="#/scheduler/appointments/my-appointments/scheduled">Scheduled <span class="badge">{{ scheduledCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge">{{ pendingCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge">{{ approvedCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/requested">Requested <span class="badge">{{ requestedCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge">{{ cancelledCount }}</span> </a></li>
+              </ul>
+            </li> -->
+            <li><a href="#/scheduler/appointments/my-appointments/scheduled">My Appointments</a></li>
+            <!-- <li ng-if="authenticated === true"><a href="#/">Notifications <span class="badge">5</span> </a></li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="authenticated != true"><a ng-href="#/register"><span class="fa fa-user"></span> Register</a></li>
+                <li ng-if="authenticated != true"><a ng-href="#/login"><span class="fa fa-sign-in"></span> Sign In</a></li>
+                <li class="dropdown" ng-if="authenticated === true">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> {{ currentUser.first_name }} <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="">Change Password</a></li>
+                      <li><a href="" ng-click="logout()">Logout</a></li>
+                  </ul>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-view=""></div>
+
+    <br>
+    <div class="footer">
+      <div class="container">
+        <p>IT Department, Midway Maritime Foundation Inc.</p>
+      </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/satellizer/satellizer.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-select2/dist/angular-select2.js"></script>
+    <script src="bower_components/ui-select/dist/select.js"></script>
+    <script src="bower_components/ev-emitter/ev-emitter.js"></script>
+    <script src="bower_components/imagesloaded/imagesloaded.js"></script>
+    <script src="bower_components/qtip2/jquery.qtip.js"></script>
+    <script src="bower_components/qtip2/basic/jquery.qtip.js"></script>
+    <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <!-- Controllers -->
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/aboutCtrl.js"></script>
+        <script src="scripts/controllers/authCtrl.js"></script>
+        <script src="scripts/controllers/registerCtrl.js"></script>
+        <script src="scripts/controllers/appointmentCtrl.js"></script>
+        <script src="scripts/controllers/appointmentDetailsCtrl.js"></script>
+        <script src="scripts/controllers/appointmentListCtrl.js"></script>
+        <script src="scripts/controllers/appointmentInvitationsCtrl.js"></script>
+        <script src="scripts/controllers/transactionCtrl.js"></script>
+        <script src="scripts/controllers/employeeCtrl.js"></script>
+        <script src="scripts/controllers/employeeDetailCtrl.js"></script>
+
+        <!-- Services -->
+        <script src="scripts/services/employee.js"></script>
+        <script src="scripts/services/department.js"></script>
+        <script src="scripts/services/level.js"></script>
+        <script src="scripts/services/position.js"></script>
+        <script src="scripts/services/appointment.js"></script>
+        <script src="scripts/services/appointmentStatus.js"></script>
+        <script src="scripts/services/personnelAppointment.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

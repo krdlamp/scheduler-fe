@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="col-sm-6">
+        <h3>Today's Schedule, {{ currentDate | date : 'MMMM d, yyyy' }}</h3>
+        <div class="panel panel-default row" ng-repeat="present in presentAppointments">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ formatTime(present.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(present.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}
+                </div>
+            </div>
+            <div class="panel-body col-sm-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p><label>Subject:</label> {{ present.subject }}</p>
+                  <p><label>Time:</label> {{ formatTime(present.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(present.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                  <p><label>Venue:</label> {{ present.venue }}</p>
+                  <p><label>Set by:</label> {{ present.employee.first_name }} {{ present.employee.last_name }}</p>
+                </div>
+                <div class="col-sm-6">
+                  <p><label>Meeting Personnel:</label></p>
+                  <ul>
+                    <li ng-repeat="emp in present.employees">{{ emp.first_name }} {{ emp.last_name }}</li>
+                  </ul>
+                  <p><label>Notes:</label> {{ present.notes }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{present.id}}/details">See Details >></a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h3>Scheduled Appointments</h3>
+        <div class="panel panel-default row" ng-repeat="appointment in appointments">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ appointment.set_date | date : 'MMMM d, yyyy' }}
+                </div>
+            </div>
+            <div class="panel-body col-sm-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p><label>Subject:</label> {{ appointment.subject }}</p>
+                  <p><label>Time:</label> {{ formatTime(appointment.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(appointment.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                  <p><label>Venue:</label> {{ appointment.venue }}</p>
+                  <p><label>Set by:</label> {{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</p>
+                </div>
+                <div class="col-sm-6">
+                  <p><label>Meeting Personnel:</label></p>
+                  <ul>
+                    <li ng-repeat="emp in appointment.employees">{{ emp.first_name }} {{ emp.last_name }}</li>
+                  </ul>
+                  <p><label>Notes:</label> {{ appointment.notes }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{appointment.id}}/details">See Details >></a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

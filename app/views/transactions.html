@@ -1,0 +1,25 @@
+<div class="container">
+  <h4>Scheduling Transactions</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Set By</th>
+        <th>Status</th>
+        <th>Updated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="appointment in appointments">
+        <td><a style="text-decoration:none;" href="#/scheduler/appointment/{{appointment.id}}/details">{{ appointment.subject }}</a></td>
+        <td>{{ appointment.set_date | date : 'MMMM d, yyyy' }}</td>
+        <td>{{ formatTime(appointment.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(appointment.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</td>
+        <td>{{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>{{ appointment.updated_at }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
