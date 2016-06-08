@@ -6,12 +6,12 @@
             <label for="subject">Subject:</label>
             <input type="text" class="form-control" id="subject" ng-model="appointment.subject">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Select Personnel:</label>
             <select class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
                     ng-options="selectedEmp as selectedEmp.first_name for selectedEmp in employees track by selectedEmp.id"
                     ng-model="selectedEmps" ng-change="syncEmps()" options="{ allowClear: true }" multiple></select>
-        </div>
+        </div> -->
         <div class="form-group">
             <label>Meeting Personnel:</label>
             <ul class="list-group">

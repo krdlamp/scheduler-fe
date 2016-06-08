@@ -21,7 +21,8 @@
     "jquery-ui": "^1.11.4",
     "components-font-awesome": "^4.6.1",
     "ngstorage": "^0.3.10",
-    "fullcalendar-yearview": "^1.4.11"
+    "fullcalendar-yearview": "^1.4.11",
+    "checklist-model": "^0.9.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

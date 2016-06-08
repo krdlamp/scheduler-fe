@@ -12,11 +12,17 @@
         </div>
         <div class="form-group">
             <label>Invite Personnel:</label>
-            <select  class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
+            <!-- <select  class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
                     ng-options="selectedEmp as selectedEmp.first_name.concat(' ' + selectedEmp.last_name) for selectedEmp in employees track by selectedEmp.id"
-                    ng-model="selectedEmps" ng-change="syncEmps()" options="{ allowClear: true }" multiple></select>
+                    ng-model="selectedEmps" ng-change="syncEmps()" options="{ allowClear: true }" multiple></select> -->
+          <li class="list-group-item">
+            <input type="checkbox" ng-model="master" ng-click="selectAll(master)"> Check All</input>
+          </li>
+          <li class="list-group-item" ng-repeat="emp in employees">
+            <input type="checkbox" ng-checked="master" ng-model="selected" ng-change="syncEmps(selected, emp, index)"> {{emp.first_name}} {{emp.last_name}} <span class="pull-right">{{ emp.department.name }}</span></input>
+          </li>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Meeting Personnel:</label>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="emp in selectedEmps">
@@ -24,7 +30,7 @@
                     <span class="pull-right">{{ emp.department.name }}</span>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="date">Date:</label>
             <input type="date" class="form-control" id="date" ng-model="set_date">
@@ -48,7 +54,7 @@
         </div>
         <label>Agendas:</label>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="New Agenda" aria-describedby="basic-addon2" ng-model="agenda.description">
+            <input value="" type="text" class="form-control" placeholder="New Agenda" aria-describedby="basic-addon2" ng-model="agenda.description">
             <span class="btn input-group-addon btn-success" id="basic-addon2" ng-click="addAgenda()"><span class="glyphicon glyphicon-plus"></span> Add</span></span>
         </div>
         <br>

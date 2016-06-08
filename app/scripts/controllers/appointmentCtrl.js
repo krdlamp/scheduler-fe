@@ -6,6 +6,15 @@ angular.module('scheduler')
             $location.path('/login');
         }
 
+        $scope.formatTime = function (time) {
+            var timeTokens = time.split(':');
+            return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
+        };
+
+        $scope.set_date = new Date();
+        $scope.start_time = new Date(1970, 0, 1, 6, 0, 0);
+        $scope.end_time = new Date(1970, 0, 1, 6, 0, 0);
+
         // Configure calendar object
         $scope.uiConfig = {
             calendar:{
@@ -69,10 +78,29 @@ angular.module('scheduler')
 
         $scope.animationsEnabled = true;
 
-        $scope.syncEmps = function() {
-            var selectedEmps = JSON.stringify($scope.selectedEmps);
-            localStorage.setItem('selectedEmps', selectedEmps);
-            $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
+        $scope.selectedEmps = [];
+
+        $scope.syncEmps = function(selected, emp, index) {
+          console.log(selected);
+          $scope.master = 0;
+            if(selected) {
+              $scope.selectedEmps.push(emp);
+              // var selectedEmps = JSON.stringify($scope.selectedEmps);
+              // localStorage.setItem('selectedEmps', selectedEmps);
+              // $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
+            } else {
+              $scope.selectedEmps.splice(index, 1);
+            }
+        };
+
+        $scope.selectAll = function(master) {
+          if(master) {
+            angular.forEach($scope.employees, function(value) {
+              $scope.selectedEmps.push(value);
+            });
+          } else {
+            $scope.selectedEmps = [];
+          }
         };
 
         // var id = 1;
@@ -112,6 +140,8 @@ angular.module('scheduler')
             data.invitation_status = 'Pending';
             data.venue             = $scope.venue;
             data.notes             = $scope.notes;
+
+            console.log(data.employees);
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];

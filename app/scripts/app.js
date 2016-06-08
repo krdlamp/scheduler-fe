@@ -22,7 +22,7 @@ angular
         'satellizer',
         'ui.bootstrap',
         'ui.select',
-        'ngFlash'
+        'ngFlash',
     ])
     .constant('Config', {
         apiBase: document.domain === 'localhost' ? '//localhost:8000/api' : '//api.scheduler.dev/api',
