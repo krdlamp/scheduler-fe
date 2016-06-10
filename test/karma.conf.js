@@ -46,6 +46,7 @@ module.exports = function(config) {
       'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/checklist-model/checklist-model.js',
+      'bower_components/isteven-angular-multiselect/isteven-multi-select.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

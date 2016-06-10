@@ -23,6 +23,7 @@ angular
         'ui.bootstrap',
         'ui.select',
         'ngFlash',
+        'isteven-multi-select'
     ])
     .constant('Config', {
         apiBase: document.domain === 'localhost' ? '//localhost:8000/api' : '//api.scheduler.dev/api',

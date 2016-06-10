@@ -78,30 +78,30 @@ angular.module('scheduler')
 
         $scope.animationsEnabled = true;
 
-        $scope.selectedEmps = [];
-
-        $scope.syncEmps = function(selected, emp, index) {
-          console.log(selected);
-          $scope.master = 0;
-            if(selected) {
-              $scope.selectedEmps.push(emp);
-              // var selectedEmps = JSON.stringify($scope.selectedEmps);
-              // localStorage.setItem('selectedEmps', selectedEmps);
-              // $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
-            } else {
-              $scope.selectedEmps.splice(index, 1);
-            }
-        };
-
-        $scope.selectAll = function(master) {
-          if(master) {
-            angular.forEach($scope.employees, function(value) {
-              $scope.selectedEmps.push(value);
-            });
-          } else {
-            $scope.selectedEmps = [];
-          }
-        };
+        // $scope.selectedEmps = [];
+        //
+        // $scope.syncEmps = function(selected, emp, index) {
+        //   console.log(selected);
+        //   $scope.master = 0;
+        //     if(selected) {
+        //       $scope.selectedEmps.push(emp);
+        //       // var selectedEmps = JSON.stringify($scope.selectedEmps);
+        //       // localStorage.setItem('selectedEmps', selectedEmps);
+        //       // $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
+        //     } else {
+        //       $scope.selectedEmps.splice(index, 1);
+        //     }
+        // };
+        //
+        // $scope.selectAll = function(master) {
+        //   if(master) {
+        //     angular.forEach($scope.employees, function(value) {
+        //       $scope.selectedEmps.push(value);
+        //     });
+        //   } else {
+        //     $scope.selectedEmps = [];
+        //   }
+        // };
 
         // var id = 1;
 

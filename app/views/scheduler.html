@@ -10,17 +10,25 @@
             <label for="subject">Subject:</label>
             <input type="text" class="form-control" id="subject" ng-model="subject">
         </div>
-        <label>Invite Personnel:</label>
         <div class="form-group">
+          <label>Select Personnel:</label>
             <!-- <select  class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
                     ng-options="selectedEmp as selectedEmp.first_name.concat(' ' + selectedEmp.last_name) for selectedEmp in employees track by selectedEmp.id"
                     ng-model="selectedEmps" ng-change="syncEmps()" options="{ allowClear: true }" multiple></select> -->
-          <li class="list-group-item">
+          <!-- <li class="list-group-item">
             <input type="checkbox" ng-model="master" ng-click="selectAll(master)"> Check All</input>
           </li>
           <li class="list-group-item" ng-repeat="emp in employees">
             <input type="checkbox" ng-checked="master" ng-model="selected" ng-change="syncEmps(selected, emp, index)"> {{emp.first_name}} {{emp.last_name}} <span class="pull-right">{{ emp.department.name }}</span></input>
-          </li>
+          </li> -->
+          <div
+            isteven-multi-select
+            input-model="employees"
+            output-model="selectedEmps"
+            button-label="first_name last_name"
+            item-label="first_name last_name"
+            tick-property="ticked"
+          ></div>
         </div>
         <!-- <div class="form-group">
             <label>Meeting Personnel:</label>
