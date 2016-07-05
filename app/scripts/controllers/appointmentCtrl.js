@@ -43,7 +43,7 @@ angular.module('scheduler')
             var emps = resp.data;
             angular.forEach(emps, function(value) {
                 if (value.id !== $scope.user.id) {
-                  if ((value.level.id === '1') || (value.level.id === '2')) {
+                  if ((value.level.id === 1) || (value.level.id === 2)) {
                     employees.push(value);
                   }
                 }
