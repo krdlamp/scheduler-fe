@@ -26,7 +26,7 @@ angular
         'isteven-multi-select'
     ])
     .constant('Config', {
-        apiBase: document.domain === 'localhost' ? '//localhost:8000/api' : '//api.scheduler.dev/api',
+        apiBase: document.domain === 'localhost' ? '//localhost:8000/api' : '//api.appointment-scheduler.dev/api',
     })
     .config(function ($routeProvider, $httpProvider, $authProvider, $provide, Config, FlashProvider) {
         $httpProvider.defaults.useXDomain = true;
