@@ -67,7 +67,7 @@ angular.module('scheduler')
             var appts = resp.data;
             angular.forEach(appts, function(value) {
               var status;
-              if($scope.appointment.employee.id === value.pivot.employee_id) {
+              if($scope.appointment.employee.id == value.pivot.employee_id) {
                 status = "Attendance Confirmed";
               } else {
                 if(value.pivot.status === "") {
@@ -81,12 +81,12 @@ angular.module('scheduler')
                 var employee_status = {first_name:emp.first_name, last_name:emp.last_name, status:status};
                 $scope.emp_stats.push(employee_status);
               }
-              if((value.employee_id !== user.id) && (value.pivot.employee_id === user.id) && (value.pivot.appointment_id === $scope.appointment.id)) {
+              if((value.employee_id !== user.id) && (value.pivot.employee_id == user.id) && (value.pivot.appointment_id == $scope.appointment.id)) {
                 if(value.pivot.status === "") {
                   $scope.isPending = true;
-                } else if(value.pivot.status === "Attendance Confirmed") {
+                } else if(value.pivot.status == "Attendance Confirmed") {
                   $scope.isApproved = true;
-                } else if(value.pivot.status === "Attendance Cancelled") {
+                } else if(value.pivot.status == "Attendance Cancelled") {
                   $scope.isCancelledAttendance = true;
                 }
               }
