@@ -76,7 +76,8 @@ angular.module('scheduler')
                   status = value.pivot.status;
                 }
               }
-              if(value.pivot.appointment_id === $scope.appointment.id) {
+              console.log(value.pivot.appointment_id == $scope.appointment.id);
+              if(value.pivot.appointment_id == $scope.appointment.id) {
                 var employee_status = {first_name:emp.first_name, last_name:emp.last_name, status:status};
                 $scope.emp_stats.push(employee_status);
               }
@@ -92,7 +93,6 @@ angular.module('scheduler')
               if(value.employee_id === user.id) {
                 if(value.status === "Cancelled") {
                   $scope.isCancelled = true;
-                  console.log($scope.isCancelled);
                 }
               }
             });
