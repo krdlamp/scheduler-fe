@@ -47,6 +47,9 @@ angular.module('scheduler')
                         if (value.level.id === 2) {
                             employees.push(value);
                         }
+                        if ((value.level.id === 3) && (value.department.id === $scope.user.department_id)) {
+                            employees.push(value);
+                        }
                     } else if($scope.user.level_id === 2) {
                         if ((value.level.id === 1 || value.level.id === 2)) {
                             employees.push(value);
