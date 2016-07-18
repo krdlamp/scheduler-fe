@@ -43,9 +43,22 @@ angular.module('scheduler')
             var emps = resp.data;
             angular.forEach(emps, function(value) {
                 if (value.id !== $scope.user.id) {
-                  if ((value.level.id === 1) || (value.level.id === 2)) {
-                    employees.push(value);
-                  }
+                    if($scope.user.level_id === 1) {
+                        if (value.level.id === 2) {
+                            employees.push(value);
+                        }
+                    } else if($scope.user.level_id === 2) {
+                        if ((value.level.id === 1 || value.level.id === 2)) {
+                            employees.push(value);
+                        }
+                        if ((value.level.id === 3) && (value.department.id === $scope.user.department_id)) {
+                            employees.push(value);
+                        }
+                    } else if($scope.user.level_id === 3) {
+                        if ((value.level.id === 2 || value.level.id === 3) && (value.department.id === $scope.user.department_id)) {
+                            employees.push(value);
+                        }
+                    }
                 }
             });
             $scope.employees = employees;
